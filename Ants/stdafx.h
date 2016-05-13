@@ -11,5 +11,8 @@
 #include <tchar.h>
 
 
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
 
 // TODO: reference additional headers your program requires here
