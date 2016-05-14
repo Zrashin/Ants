@@ -4,22 +4,24 @@
 #include "stdafx.h"
 #include "VisibleObject.h"
 #include <list>
+#include <iostream>
+#include <random>
 
 int main()
 {
-	sf::Window window(sf::VideoMode(800,600), "ANTS");
+	sf::RenderWindow window(sf::VideoMode(800,600,32), "ANTS");
 	
-	std::list<VisibleObject> objectList;
+	std::list<VisibleObject*> objectList;
 
+	srand(time(NULL));
 
 	while (window.isOpen())
 	{	
 
 		sf::Event event;
-		
+
 		while (window.pollEvent(event)) 
 		{
-			VisibleObject ant;
 			switch (event.type)
 			{
 			case sf::Event::Closed:
@@ -27,9 +29,7 @@ int main()
 				break;
 			case sf::Event::MouseButtonPressed:
 
-				ant.Load("images/ant.png");
-				ant.SetPosition(sf::Mouse::getPosition().x,sf::Mouse::getPosition().y);
-				objectList.push_back(ant);
+				objectList.push_back(new VisibleObject("images/ant.png", event.mouseButton.x, event.mouseButton.y));
 
 				break;
 
@@ -37,6 +37,19 @@ int main()
 				break;
 			}
 		}
+
+		window.clear(sf::Color(0,0,0));
+
+		std::list<VisibleObject*>::iterator iterator;
+		for (iterator = objectList.begin(); iterator != objectList.end(); ++iterator) 
+		{
+			(*iterator)->randomMove('x',(rand()%3)-1);
+			(*iterator)->randomMove('y', (rand() % 3) - 1);
+			window.draw((*iterator)->getSprite());
+
+		}
+
+		window.display();
 	}
     return 0;
 }

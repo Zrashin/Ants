@@ -1,10 +1,13 @@
 #include "StdAfx.h"
 #include "VisibleObject.h"
+#include <iostream>
+#include <random>
 
-
-VisibleObject::VisibleObject()
+VisibleObject::VisibleObject(std::string filename, int x, int y)
 {
 	_isLoaded = false;
+	Load(filename);
+	SetPosition(x, y);
 }
 
 
@@ -25,7 +28,6 @@ void VisibleObject::Load(std::string filename)
 		_sprite.setTexture(_texture);
 		_isLoaded = true;
 	}
-	_boundingBox = _sprite.getGlobalBounds();
 }
 
 void VisibleObject::Draw(sf::RenderWindow & renderWindow)
@@ -42,4 +44,29 @@ void VisibleObject::SetPosition(float x, float y)
 	{
 		_sprite.setPosition(x, y);
 	}
+}
+
+std::string VisibleObject::getFileName()
+{
+	return _filename;
+}
+
+sf::Sprite VisibleObject::getSprite()
+{
+	return _sprite;
+}
+
+void VisibleObject::randomMove(char range, int value)
+{
+
+	sf::Vector2f pos = _sprite.getPosition();
+	if (range =='x') 
+	{
+		pos.x += value;
+	}
+	else 
+	{
+		pos.y += value;
+	}
+	_sprite.setPosition(pos);
 }

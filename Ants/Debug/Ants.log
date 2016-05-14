@@ -1,5 +1,3 @@
-﻿  stdafx.cpp
-  VisibleObject.cpp
-  Ants.cpp
-  Generating Code...
+﻿  Ants.cpp
+d:\programming stuff\projects\ants\ants\ants.cpp(16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Ants.vcxproj -> D:\PROGRAMMING STUFF\Projects\Ants\Debug\Ants.exe
